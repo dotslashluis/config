@@ -1,52 +1,72 @@
+## Initial imports
 from libqtile.config import Key, Screen, Group, Drag, Click
 from libqtile.command import lazy
 from libqtile import layout, bar, widget
 from typing import List  # noqa: F401
 
-# Set the "Windows" key as the mod key
-mod = "mod4"
-alt = "mod1"
-
-# Sets terminal to alacritty
-term = "alacritty"
-
-# Color for borders
-color_focus = "8fa1b3"
-color_idle  = "000000"
-
-# Autostart applications
+# Autostart applications imports'
 from libqtile import hook
 import os
 import subprocess
 
-@hook.subscribe.startup
+## Rename the keys for easier reading
+WIN = "mod4"
+ALT = "mod1"
+TAB = "Tab"
+CTRL = "control"
+SHIFT = "shift"
+RETURN = "Return"
+SPACE = "space"
+mod = WIN
+
+## Set terminal to alacritty
+term = "alacritty"
+
+## Color for borders
+color_focus = "8fa1b3"
+color_idle  = "000000"
+
+## Common commands
+# Volume control 
+vol_step = 5
+vol_up = f"pamixer -i {vol_step}"
+vol_down = f"pamixer -d {vol_step}"
+vol_mute = "pamixer -t"
+
+# Screen lock
+lock = "xcreensaver-command --lock"
+
+## Autostart hook
+@hook.subscribe.startup_once
 def autostart():
     subprocess.call("/home/lc/.config/qtile/autostart.sh")
-
 
 # Keybindings
 keys = [
     # Change window focus
-    Key([mod], "j", lazy.layout.down()),
-    Key([mod], "k", lazy.layout.up()),
-    Key([mod], "h", lazy.layout.left()),
-    Key([mod], "l", lazy.layout.right()),
+    Key([mod], "Down", lazy.layout.down()),
+    Key([mod], "Up", lazy.layout.up()),
+    Key([mod], "Left", lazy.layout.left()),
+    Key([mod], "Right", lazy.layout.right()),
 
     # Moves windows
-    Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
-    Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
-    Key([mod, "shift"], "h", lazy.layout.shuffle_left()),
-    Key([mod, "shift"], "l", lazy.layout.shuffle_right()),
+    Key([mod, SHIFT], "Down", lazy.layout.shuffle_down()),
+    Key([mod, SHIFT], "Up", lazy.layout.shuffle_up()),
+    Key([mod, SHIFT], "Left", lazy.layout.shuffle_left()),
+    Key([mod, SHIFT], "Right", lazy.layout.shuffle_right()),
 
     # Increase the size of the window
-    Key([mod, "control"], "j", lazy.layout.grow_down()),
-    Key([mod, "control"], "k", lazy.layout.grow_up()),
-    Key([mod, "control"], "h", lazy.layout.grow_left()),
-    Key([mod, "control"], "l", lazy.layout.grow_right()),
+    Key([mod, CTRL], "Down", lazy.layout.grow_down()),
+    Key([mod, CTRL], "Up", lazy.layout.grow_up()),
+    Key([mod, CTRL], "Left", lazy.layout.grow_left()),
+    Key([mod, CTRL], "Right", lazy.layout.grow_right()),
+    
+    # Fullscreen toggle
+    Key([mod], "m", lazy.window.toggle_fullscreen()),
 
     # Reset the size of the windows
-    Key([mod, "shift"], "n", lazy.layout.normalize()),
-    Key([mod], "Return", lazy.layout.toggle_split()),
+    Key([mod, SHIFT], "n", lazy.layout.normalize()),
+    Key([mod], RETURN, lazy.layout.toggle_split()),
 
     # Open the terminal
     Key([mod], "t", lazy.spawn(term)),
@@ -64,18 +84,25 @@ keys = [
     Key([mod], "r", lazy.spawncmd()),
 
     # Volume keys
-    Key([mod], "XF86AudioRaiseVolume", lazy.spawn("pamixer -i 5")),
-    Key([mod], "XF86AudioLowerVolume", lazy.spawn("pamixer -d 5")),
-    Key([mod], "XF86AudioMute", lazy.spawn("pamixer -t")),
+    Key([mod], "XF86AudioRaiseVolume", lazy.spawn(vol_up)),
+    Key([mod], "XF86AudioLowerVolume", lazy.spawn(vol_down)),
+    Key([mod], "XF86AudioMute", lazy.spawn(vol_mute)),
 
 
 ]
 
-groups = [
-    Group("Terminals"),
-    Group("Web"),
-    Group("Etc")
-]
+groups = [Group(i) for i in "1234"]
+
+for i in groups:
+    # mod + number to switch to the group
+    keys.append(
+            Key([mod], i.name, lazy.group[i.name].toscreen())
+    )
+    # mod + shift + number to move focused window to group
+    keys.append(
+            Key([mod, SHIFT], i.name, lazy.window.togroup(i.name))
+    )
+
 
 layouts = [
     # BSP layout (i3 like)
@@ -110,10 +137,12 @@ screens = [
                 widget.Prompt(),
                 widget.WindowName(),
                 widget.Systray(),
+                #Volume widget
                 widget.Volume(),
                 widget.Clock(format='%Y-%m-%d %a %I:%M %p'),
             ],
-            24,
+            # Bar size
+            36,
         ),
     ),
 ]
