@@ -7,6 +7,8 @@ XORG mousepad and GPU configuration
 
 i3 configuration
 
+Qtile configuration (WIP)
+
 ===TODO===
 
 .vimrc
