@@ -16,8 +16,6 @@ elif [[ "$1" == "-i" ]]; then
     newb=$((oldb+step))
 fi
 
-echo $newb
-
 # Conditional so that brightness doesn't go above the max or below 0
 if [[ $newb  -le $maxb ]] && [[ $newb -gt $step ]]; then
     echo $newb > /sys/class/backlight/amdgpu_bl0/brightness
