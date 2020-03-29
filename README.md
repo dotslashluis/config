@@ -1,21 +1,30 @@
-# config
-Some XORG config files and dotfiles that I don't want to redo for the Lenovo Ideapad 330S-ARR
+# DotSlashLuis' configuration files
 
-Currently
+## What is this
 
-XORG mousepad and GPU configuration
+These are some dotfiles and configurations that I've created and don't want to redo when I reinstall my system or when I accidentally break something.
 
-i3 configuration
+## Disclaimer
 
-Qtile configuration (WIP)
+These dotfiles were made for a Lenovo Ideapad 330s-15ARR with Arch Linux as it's host OS.  If you use these Xorg configuration files it is not guarenteed to work if you PC doesn't adhere to these specifications.
 
-===TODO===
+## What is in this repository
 
-.vimrc
+* Qtile configuration script and some scripts to make the experience more comfortable
 
-.bashrc
+* Xorg configuration files for the touchpad and for the AMDGPU driver
 
-fish.config
+## What do I want to add to the repository
 
-.zshrc
+* Fish' configuration file
+
+* .bashrc and .profile related stuff that I need tto use devkitpro.
+
+* A dependency list so that I can reinstall everything easily.
+
+* An installation script to automate the process of putting everything in place *and maybe automate the process of setting up everything*
+
+* .vimrc
+
+* Alacritty's configuration file
 
