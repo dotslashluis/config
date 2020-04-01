@@ -14,17 +14,19 @@ These dotfiles were made for a Lenovo Ideapad 330s-15ARR with Arch Linux as it's
 
 * Xorg configuration files for the touchpad and for the AMDGPU driver
 
+* Alacritty's configuration file
+
+* An installation script to automate the process of putting everything in place
+
+* .bashrc, .pam_profile, .profile and .Xresources
+
 ## What do I want to add to the repository
 
 * Fish' configuration file
 
-* .bashrc and .profile related stuff that I need tto use devkitpro.
-
-* A dependency list so that I can reinstall everything easily.
-
-* An installation script to automate the process of putting everything in place *and maybe automate the process of setting up everything*
+* A dependency list so that I can reinstall everything easily. (Kinda implemented)
 
 * .vimrc
 
-* Alacritty's configuration file
+
 
