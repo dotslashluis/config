@@ -7,4 +7,4 @@ compton --config $HOME/.config/picom.conf & # Compositor
 # ibus-daemon -drx --panel /usr/lib/ibus/ibus-ui-gtk3 & # iBus applet
 clipmenud & # Clipboard manager
 fcitx &
-
+light-locker &

@@ -28,7 +28,7 @@
 dotslashluis' Qtile configuration
 Programs used:
 dmenu
-xscreensaver
+light-locker
 fcitx
 pamixer
 nm-applet
@@ -114,12 +114,12 @@ fg = b16[7]
 ## Common commands
 # Volume control 
 vol_step = 5
-vol_up = f"pamixer -i {vol_step}"
-vol_down = f"pamixer -d {vol_step}"
+vol_up = f"pamixer -i {vol_step} --allow-boost"
+vol_down = f"pamixer -d {vol_step} --allow-boost"
 vol_mute = "pamixer -t"
 
 # Screen lock FIX: Doesn't work
-lock = "xcreensaver-command -lock"
+lock = f"light-locker-command -l"
 
 ## Autostart hook
 @hook.subscribe.startup_once
@@ -248,7 +248,7 @@ keys = [
     Key([], "XF86MonBrightnessDown", lazy.spawn(f"{HOME}/.config/qtile/brightness.sh -d")),
         
     # Lock key
-    Key([mod], "l", lazy.spawn(lock)),
+    Key([mod], "l", lazy.spawn("light-locker-command -l")),
     # Note: Lock key works without mod.  This locks the screen
     # with mod + l
 ]
@@ -297,7 +297,6 @@ screens = [
                 widget.Prompt(),
                 widget.WindowName(),
                 widget.Systray(),
-                widget.TextBox("Hello"),
                 widget.Battery(
                     format="{char} {percent:2.0%}",
                     low_foreground=b16[1],
