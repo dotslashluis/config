@@ -1,18 +1,25 @@
 #!/bin/bash
 
-# This script is made for installing the required dependencies for this setup.  Run as sudo otherwise it won't work
+# Create the .config, alacritty and qtile directories
+mkdir $HOME/.config $HOME/.config/qtile $HOME/.config/alacritty
 
-mkdir $HOME/.config
+# Now copy the repo to the .config directory so the configuration looks cleaner
+cp -r ./ .config/dotfiles
+cd $HOME/.config/dotfiles
 
-REPO_DIR=$( pwd )
+## Link the fuck out of everything
+# HOME DOTFILES
+ln home/bashrc $HOME/.bashrc
+ln home/Xresources $HOME/.Xresources
+ln home/pam_profile $HOME/.pam_profile
+ln home/bash_profile $HOME/.bash_profile
+ln home/vimrc $HOME/.vimrc
 
 
-sudo pacman -S qtile xscreensaver fcitx alacritty picom network-manager-applet feh clipmenu curl vim xf86-video-amdgpu
+# QTILE
+ln config/qtile/config.py $HOME/config/qtile/config.py
+ln config/qtile/autostart.sh $HOME/config/qtile/autostart.sh
+ln config/qtile/brightness.sh $HOME/config/qtile/brightness.sh
 
-# Now copy the files
-cp -r config/* $HOME/.config
-cp -r home $HOME 
-sudo cp xorg.conf.d/* /etc/X11/xorg.conf.d/
-
-
-
+# ALACRITTY
+ln config/alacritty/alacritty.yml $HOME/.config/alacritty/alacritty.yml
