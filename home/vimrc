@@ -61,5 +61,8 @@ set laststatus=2
 let g:lightline = {
 	\ 'colorscheme': 'dogrun',
 	\ }
+" Make the background transparent when vim opens in a terminal
+hi! Normal ctermbg=NONE
 
+set cursorline
 let g:cssColorVimNotMessMyUpddateTime = 1
