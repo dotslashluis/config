@@ -34,6 +34,9 @@ Plugin 'wadackel/vim-dogrun'
 " Lightline
 Plugin 'itchyny/lightline.vim'
 
+" Vim CSS Color
+Plugin 'skammer/vim-css-color'
+
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
@@ -58,3 +61,5 @@ set laststatus=2
 let g:lightline = {
 	\ 'colorscheme': 'dogrun',
 	\ }
+
+let g:cssColorVimNotMessMyUpddateTime = 1
