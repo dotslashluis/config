@@ -29,7 +29,7 @@ dotslashluis' Qtile configuration
 Programs used:
 dmenu
 xscreensaver
-ibus
+fcitx
 pamixer
 nm-applet
 picom
@@ -69,28 +69,47 @@ screenshot="shotgun"
 # Colorscheme used: Atelier heath dark by Bram de Haan
 # Check him out! (http://atelierbramdehaan.nl)
 # He also has a github (https://github.com/atelierbram/)
-
+"""
 b16 = [ 
-    "1b181b",
-    "ca402b",
-    "379a37",
-    "bb8a35",
-    "516aec",
-    "7b59c0",
-    "159393",
-    "ab9bab",
-    "776977",
-    "ca402b",
-    "379a37",
-    "bb8a35",
-    "516aec",
-    "7b59c0",
-    "159393",
-    "f7f3f7"
+    "#1b181b",
+    "#ca402b",
+    "#379a37",
+    "#bb8a35",
+    "#516aec",
+    "#7b59c0",
+    "#159393",
+    "#ab9bab",
+    "#776977",
+    "#ca402b",
+    "#379a37",
+    "#bb8a35",
+    "#516aec",
+    "#7b59c0",
+    "#159393",
+    "#f7f3f7"
+]
+"""
+b16 = [
+    "#111219",
+    "#db5966",
+    "#7cbe8c",
+    "#9b956b",
+    "#2994c6",
+    "#6c75cb",
+    "#73c1a9",
+    "#9ea3c0",
+    "#545c8c",
+    "#c173c1",
+    "#7cbe8c",
+    "#b5ae7d",
+    "#31a9e5",
+    "#929be5",
+    "#2aacbd",
+    "#9ea3c0",
 ]
 
-bg = "1b181b"
-fg = "ab9bab"
+bg = b16[0]
+fg = b16[7]
 
 ## Common commands
 # Volume control 
@@ -186,6 +205,7 @@ keys = [
     Key([mod], "d", lazy.run_extension(extension.DmenuRun(
             dmenu_prompt=">",
             dmenu_bottom=True,
+            dmenu_font="Noto Sans"
             )
         )
     ),
@@ -249,7 +269,7 @@ layouts = [
 
 
 widget_defaults = dict(
-    font= "Source Code Pro",
+    font= "Inconsolata",
     fontsize= 14,
     padding= 10,
 )
@@ -277,7 +297,13 @@ screens = [
                 widget.Prompt(),
                 widget.WindowName(),
                 widget.Systray(),
-                widget.Clock(format='%Y-%m-%d %a %I:%M %p'),
+                widget.TextBox("Hello"),
+                widget.Battery(
+                    format="{char} {percent:2.0%}",
+                    low_foreground=b16[1],
+                    low_percentage=0.25,
+                ),
+                widget.Clock(format='%d-%m-%Y %a %H:%M'),
             ],
             # Bar size
             32,
