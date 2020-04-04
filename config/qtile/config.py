@@ -24,12 +24,12 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-""" 
+"""
 dotslashluis' Qtile configuration
 Programs used:
 dmenu
 light-locker
-fcitx
+ibus
 pamixer
 nm-applet
 picom
@@ -66,29 +66,8 @@ screenshot="shotgun"
 
 
 ## Colors
-# Colorscheme used: Atelier heath dark by Bram de Haan
-# Check him out! (http://atelierbramdehaan.nl)
-# He also has a github (https://github.com/atelierbram/)
-"""
-b16 = [ 
-    "#1b181b",
-    "#ca402b",
-    "#379a37",
-    "#bb8a35",
-    "#516aec",
-    "#7b59c0",
-    "#159393",
-    "#ab9bab",
-    "#776977",
-    "#ca402b",
-    "#379a37",
-    "#bb8a35",
-    "#516aec",
-    "#7b59c0",
-    "#159393",
-    "#f7f3f7"
-]
-"""
+# Colorscheme used: Dogrun
+
 b16 = [
     "#111219",
     "#db5966",
@@ -112,7 +91,7 @@ bg = b16[0]
 fg = b16[7]
 
 ## Common commands
-# Volume control 
+# Volume control
 vol_step = 5
 vol_up = f"pamixer -i {vol_step} --allow-boost"
 vol_down = f"pamixer -d {vol_step} --allow-boost"
@@ -129,34 +108,34 @@ def autostart():
 ## Groups
 # FIX!! Only brave works with the match (????????)
 groups = [
-        Group("web", 
-            matches=[
-                Match(wm_class="brave-browser"),
-                Match(wm_class="firefox"),
-                Match(wm_class="Opera")
-            ]
-        ),
-        Group("steam",
-            matches=[
-                Match(wm_class="Steam")
-            ]    
-        ),
-        Group("code",
-            matches=[
-                Match(wm_class="code-oss")
-            ]
-        ),
-        Group("chat",
-            matches=[
-                Match(wm_class="discord")
-            ]
-        ),
-        Group("etc"),
-        Group("term",
-            matches=[
-                Match(wm_class="Alacritty")
-            ]
-        ),
+    Group("web",
+        matches=[
+            Match(wm_class="brave-browser"),
+            Match(wm_class="firefox"),
+            Match(wm_class="Opera")
+        ]
+    ),
+    Group("steam",
+        matches=[
+            Match(wm_class="Steam")
+        ]
+    ),
+    Group("code",
+        matches=[
+            Match(wm_class="code-oss")
+        ]
+    ),
+    Group("chat",
+        matches=[
+            Match(wm_class="discord")
+        ]
+    ),
+    Group("etc"),
+    Group("term",
+        matches=[
+            Match(wm_class="Alacritty")
+        ]
+    ),
 ]
 
 # Keybindings
@@ -178,9 +157,9 @@ keys = [
     Key([mod, CTRL], "Up", lazy.layout.grow_up()),
     Key([mod, CTRL], "Left", lazy.layout.grow_left()),
     Key([mod, CTRL], "Right", lazy.layout.grow_right()),
-    
+
     # Fullscreen toggle
-    Key([mod], "m", lazy.window.toggle_fullscreen()),
+    Key([mod], "f", lazy.window.toggle_fullscreen()),
 
     # Reset the size of the windows
     Key([mod, SHIFT], "n", lazy.layout.normalize()),
@@ -188,7 +167,7 @@ keys = [
 
     # Open the preferred terminal emulator
     Key([mod], "t", lazy.spawn(term)),
-    
+
     # Close focused window
     Key([mod], "w", lazy.window.kill()),
 
@@ -200,7 +179,7 @@ keys = [
 
     # Command promt.  Dmenu replaces it
     #Key([mod], "r", lazy.spawncmd()),
-    
+
     # Dmenu
     Key([mod], "d", lazy.run_extension(extension.DmenuRun(
             dmenu_prompt=">",
@@ -209,7 +188,7 @@ keys = [
             )
         )
     ),
-    
+
     # Clipboard manager
     Key([mod], "c", lazy.spawn("clipmenu")),
 
@@ -227,7 +206,7 @@ keys = [
     Key([mod], "4", lazy.group["chat"].toscreen()),
     Key([mod], "5", lazy.group["term"].toscreen()),
     Key([mod], "6", lazy.group["etc"].toscreen()),
-    
+
     # Move window to group
     Key([mod, SHIFT], "1", lazy.window.togroup("web")),
     Key([mod, SHIFT], "2", lazy.window.togroup("steam")),
@@ -246,7 +225,16 @@ keys = [
     # Brightness keys
     Key([], "XF86MonBrightnessUp", lazy.spawn(f"{HOME}/.config/qtile/brightness.sh -i")),
     Key([], "XF86MonBrightnessDown", lazy.spawn(f"{HOME}/.config/qtile/brightness.sh -d")),
-        
+
+    # Now the same for external keyboards
+    Key([mod], "k", lazy.spawn(vol_up)),
+    Key([mod], "j", lazy.spawn(vol_down)),
+    Key([mod], "m", lazy.spawn(vol_mute)),
+
+    # Brightness keys
+    Key([mod], "i", lazy.spawn(f"{HOME}/.config/qtile/brightness.sh -i")),
+    Key([mod], "u", lazy.spawn(f"{HOME}/.config/qtile/brightness.sh -d")),
+
     # Lock key
     Key([mod], "l", lazy.spawn("light-locker-command -l")),
     # Note: Lock key works without mod.  This locks the screen

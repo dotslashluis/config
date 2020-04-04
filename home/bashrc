@@ -21,3 +21,13 @@ alias edmirror='sudo $EDITOR /etc/pacman.d/mirrorlist'
 alias alcfg='$EDITOR $HOME/.config/alacritty/alacritty.yml'
 alias qtilecfg='$EDITOR $HOME/.config/qtile/config.py'
 alias vim='nvim'
+
+# Path
+PATH=$HOME/.cargo/bin:$HOME/.local/bin:$PATH
+
+# iBus Settings
+export GTK_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+export QT_IM_MODULE=ibus
+
+setxkbmap es
