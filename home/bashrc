@@ -30,4 +30,6 @@ export GTK_IM_MODULE=ibus
 export XMODIFIERS=@im=ibus
 export QT_IM_MODULE=ibus
 
+# iBus doesn't work in Alacritty so I used this command to change the
+# keybaord layout just fot the terminal.
 setxkbmap es
