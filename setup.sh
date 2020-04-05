@@ -1,20 +1,19 @@
 #!/bin/bash
 
 # Create the .config, alacritty and qtile directories
-mkdir $HOME/.config $HOME/.config/qtile $HOME/.config/alacritty
+mkdir -p $HOME/.config/dotfiles $HOME/.config/qtile $HOME/.config/alacritty
 
 # Now copy the repo to the .config directory so the configuration looks cleaner
-cp -r ./ .config/dotfiles
+cp -r ./* .config/dotfiles/
 cd $HOME/.config/dotfiles
 
 ## Link the fuck out of everything
 # HOME DOTFILES
-ln home/bashrc $HOME/.bashrc
-ln home/Xresources $HOME/.Xresources
-ln home/pam_profile $HOME/.pam_profile
-ln home/bash_profile $HOME/.bash_profile
-ln home/vimrc $HOME/.vimrc
-
+ln home/bashrc $HOME/.bashrc || echo "ERROR - Couldn't link bashrc"
+ln home/Xresources $HOME/.Xresources || "ERROR - Couldn't link Xresources"
+ln home/pam_profile $HOME/.pam_profile || "ERROR - Couldn't link pam_profile"
+ln home/bash_profile $HOME/.bash_profile || "ERROR - Couldn't link bash_profile"
+ln home/vimrc $HOME/.vimrc || "ERROR - Couldn't link vimrc"
 
 # QTILE
 ln config/qtile/config.py $HOME/config/qtile/config.py
