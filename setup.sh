@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Create the .config, alacritty and qtile directories
-mkdir -p $HOME/.config/dotfiles $HOME/.config/qtile $HOME/.config/alacritty
+mkdir -p $HOME/.config/qtile $HOME/.config/alacritty
 
 # Now copy the repo to the .config directory so the configuration looks cleaner
-cp -r ./* .config/dotfiles/
+[ "$( pwd )" == "$HOME/.config/dotfiles" ] && mkdir -p $HOME/.config/dotfile && cp -r ./* .config/dotfiles/
 cd $HOME/.config/dotfiles
 
 ## Link the fuck out of everything
