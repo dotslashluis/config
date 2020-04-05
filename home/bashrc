@@ -6,6 +6,8 @@
 [[ $- != *i* ]] && return
 
 alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias make='colormake'
 
 # Variables
 export XDG_CONFIG_HOME=$HOME/.config
@@ -13,14 +15,15 @@ export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
 export BROWSER='firefox'
 export EDITOR='nvim'
+export RCPATH="$HOME/git/dotfiles"
 
 # Custom bash prompt via kirsle.net/wizards/ps1.html
 export PS1="\[$(tput bold)\]\[$(tput setaf 1)\][\[$(tput setaf 3)\]\u\[$(tput setaf 2)\]@\[$(tput setaf 4)\]\h \[$(tput setaf 5)\]\W\[$(tput setaf 1)\]]\[$(tput setaf 7)\]\\$ \[$(tput sgr0)\]"
 # Some aliases to make me type less
-alias edmirror='sudo $EDITOR /etc/pacman.d/mirrorlist'
-alias alcfg='$EDITOR $HOME/.config/alacritty/alacritty.yml'
-alias qtilecfg='$EDITOR $HOME/.config/qtile/config.py'
-alias vim='nvim'
+alias edmirror="sudo $EDITOR /etc/pacman.d/mirrorlist"
+alias alcfg="$EDITOR $HOME/.config/alacritty/alacritty.yml"
+alias qtilecfg="$EDITOR $HOME/.config/qtile/config.py"
+alias vim="nvim"
 
 # Path
 PATH=$HOME/.cargo/bin:$HOME/.local/bin:$PATH
@@ -32,4 +35,27 @@ export QT_IM_MODULE=ibus
 
 # iBus doesn't work in Alacritty so I used this command to change the
 # keybaord layout just fot the terminal.
-setxkbmap es
+setxkbmap us
+
+# Colored man output with less
+man() {
+    LESS_TERMCAP_md=$'\e[01;31m' \
+    LESS_TERMCAP_me=$'\e[0m' \
+    LESS_TERMCAP_se=$'\e[0m' \
+    LESS_TERMCAP_so=$'\e[01;44;33m' \
+    LESS_TERMCAP_ue=$'\e[0m' \
+    LESS_TERMCAP_us=$'\e[01;32m' \
+    command man "$@"
+}
+
+cfg() {
+	echo "What would you like to edit?"
+	cat $RCPATH/menu | lolcat
+	read R
+	[[ "$R" == "1" ]] && $EDITOR $RCPATH/home/bashrc
+	[[ "$R" == "2" ]] && $EDITOR $RCPATH/home/bash_profile
+	[[ "$R" == "3" ]] && $EDITOR $RCPATH/home/profile
+	[[ "$R" == "4" ]] && $EDITOR $RCPATH/config/qtile/config.py
+	[[ "$R" == "5" ]] && $EDITOR $RCPATH/home/vimrc
+	[[ "$R" == "6" ]] && $EDITOR $RCPATH/config/qtile/autostart.sh
+}

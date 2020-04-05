@@ -106,36 +106,13 @@ def autostart():
     subprocess.call(f"{HOME}/.config/qtile/autostart.sh")
 
 ## Groups
-# FIX!! Only brave works with the match (????????)
 groups = [
-    Group("web",
-        matches=[
-            Match(wm_class="brave-browser"),
-            Match(wm_class="firefox"),
-            Match(wm_class="Opera")
-        ]
-    ),
-    Group("steam",
-        matches=[
-            Match(wm_class="Steam")
-        ]
-    ),
-    Group("code",
-        matches=[
-            Match(wm_class="code-oss")
-        ]
-    ),
-    Group("chat",
-        matches=[
-            Match(wm_class="discord")
-        ]
-    ),
-    Group("etc"),
-    Group("term",
-        matches=[
-            Match(wm_class="Alacritty")
-        ]
-    ),
+    Group("1"),
+    Group("2"),
+    Group("3"),
+    Group("4"),
+    Group("5"),
+    Group("6"),
 ]
 
 # Keybindings
@@ -200,20 +177,20 @@ keys = [
 
     ##Group handling
     # Switch between groups
-    Key([mod], "1", lazy.group["web"].toscreen()),
-    Key([mod], "2", lazy.group["steam"].toscreen()),
-    Key([mod], "3", lazy.group["code"].toscreen()),
-    Key([mod], "4", lazy.group["chat"].toscreen()),
-    Key([mod], "5", lazy.group["term"].toscreen()),
-    Key([mod], "6", lazy.group["etc"].toscreen()),
+    Key([mod], "1", lazy.group["1"].toscreen()),
+    Key([mod], "2", lazy.group["2"].toscreen()),
+    Key([mod], "3", lazy.group["3"].toscreen()),
+    Key([mod], "4", lazy.group["4"].toscreen()),
+    Key([mod], "5", lazy.group["5"].toscreen()),
+    Key([mod], "6", lazy.group["6"].toscreen()),
 
     # Move window to group
-    Key([mod, SHIFT], "1", lazy.window.togroup("web")),
-    Key([mod, SHIFT], "2", lazy.window.togroup("steam")),
-    Key([mod, SHIFT], "3", lazy.window.togroup("code")),
-    Key([mod, SHIFT], "4", lazy.window.togroup("chat")),
-    Key([mod, SHIFT], "5", lazy.window.togroup("term")),
-    Key([mod, SHIFT], "6", lazy.window.togroup("etc")),
+    Key([mod, SHIFT], "1", lazy.window.togroup("1")),
+    Key([mod, SHIFT], "2", lazy.window.togroup("2")),
+    Key([mod, SHIFT], "3", lazy.window.togroup("3")),
+    Key([mod, SHIFT], "4", lazy.window.togroup("4")),
+    Key([mod, SHIFT], "5", lazy.window.togroup("5")),
+    Key([mod, SHIFT], "6", lazy.window.togroup("6")),
 
     ## Function keys
 
@@ -222,11 +199,12 @@ keys = [
     Key([], "XF86AudioLowerVolume", lazy.spawn(vol_down)),
     Key([], "XF86AudioMute", lazy.spawn(vol_mute)),
     Key([mod], "v", lazy.spawn("pavucontrol")),
+
     # Brightness keys
     Key([], "XF86MonBrightnessUp", lazy.spawn(f"{HOME}/.config/qtile/brightness.sh -i")),
     Key([], "XF86MonBrightnessDown", lazy.spawn(f"{HOME}/.config/qtile/brightness.sh -d")),
 
-    # Now the same for external keyboards
+    # Now the same for keyboards that don't have function keys
     Key([mod], "k", lazy.spawn(vol_up)),
     Key([mod], "j", lazy.spawn(vol_down)),
     Key([mod], "m", lazy.spawn(vol_mute)),
@@ -236,7 +214,7 @@ keys = [
     Key([mod], "u", lazy.spawn(f"{HOME}/.config/qtile/brightness.sh -d")),
 
     # Lock key
-    Key([mod], "l", lazy.spawn("light-locker-command -l")),
+    Key([mod], "l", lazy.spawn(lock)),
     # Note: Lock key works without mod.  This locks the screen
     # with mod + l
 ]
