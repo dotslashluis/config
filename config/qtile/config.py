@@ -263,6 +263,9 @@ screens = [
                 widget.Prompt(),
                 widget.WindowName(),
                 widget.Systray(),
+                widget.KeyboardLayout(
+                    configured_keyboards=["us", "es"],
+                ),
                 widget.Battery(
                     format="{char} {percent:2.0%}",
                     low_foreground=b16[1],
