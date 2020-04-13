@@ -5,37 +5,33 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-alias ls='ls --color=auto'
+alias lsa='exa -la --sort=type --color=auto'
+alias ls='exa -l --sort=type --color=auto'
 alias grep='grep --color=auto'
 alias make='colormake'
+alias ..="cd .."
 
 # Variables
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
-export BROWSER='firefox'
+export BROWSER='brave'
 export EDITOR='nvim'
-export RCPATH="$HOME/git/dotfiles"
+export RCPATH="$HOME/.config/dotfiles"
+
+# History configuration
+export HISTCONTROL=ignoreboth
+export HISTFILESIZE=512
+export HISTSIZE=256
 
 # Custom bash prompt via kirsle.net/wizards/ps1.html
 export PS1="\[$(tput bold)\]\[$(tput setaf 1)\][\[$(tput setaf 3)\]\u\[$(tput setaf 2)\]@\[$(tput setaf 4)\]\h \[$(tput setaf 5)\]\W\[$(tput setaf 1)\]]\[$(tput setaf 7)\]\\$ \[$(tput sgr0)\]"
-# Some aliases to make me type less
-alias edmirror="sudo $EDITOR /etc/pacman.d/mirrorlist"
-alias alcfg="$EDITOR $HOME/.config/alacritty/alacritty.yml"
-alias qtilecfg="$EDITOR $HOME/.config/qtile/config.py"
+
+# Some aliases to type less
 alias vim="nvim"
 
 # Path
 PATH=$HOME/.cargo/bin:$HOME/.local/bin:$PATH
-
-# iBus Settings
-export GTK_IM_MODULE=ibus
-export XMODIFIERS=@im=ibus
-export QT_IM_MODULE=ibus
-
-# iBus doesn't work in Alacritty so I used this command to change the
-# keybaord layout just fot the terminal.
-setxkbmap us
 
 # Colored man output with less
 man() {
@@ -49,13 +45,26 @@ man() {
 }
 
 cfg() {
-	echo "What would you like to edit?"
-	cat $RCPATH/menu | lolcat
-	read R
+	if [[ -z "$1" ]]
+	then
+		echo "What would you like to edit?"
+		echo ''
+		cat $RCPATH/menu | lolcat
+		read R
+	else
+		R="$1"
+	fi
 	[[ "$R" == "1" ]] && $EDITOR $RCPATH/home/bashrc
 	[[ "$R" == "2" ]] && $EDITOR $RCPATH/home/bash_profile
 	[[ "$R" == "3" ]] && $EDITOR $RCPATH/home/profile
-	[[ "$R" == "4" ]] && $EDITOR $RCPATH/config/qtile/config.py
-	[[ "$R" == "5" ]] && $EDITOR $RCPATH/home/vimrc
-	[[ "$R" == "6" ]] && $EDITOR $RCPATH/config/qtile/autostart.sh
+	[[ "$R" == "4" ]] && $EDITOR $RCPATH/config/nvim/init.vim
+	[[ "$R" == "5" ]] && $EDITOR $RCPATH/config/alacritty/alacritty.yml
+
 }
+
+# Keyboard layouts
+setxkbmap -layout "us,es"
+
+# Adds a colored fortune at the start of every shell
+printf "$(fortune -s)" | lolcat
+echo 

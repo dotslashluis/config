@@ -2,7 +2,7 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=~/.config/nvim/bundle/Vundle.vim
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
@@ -18,8 +18,6 @@ Plugin 'tpope/vim-fugitive'
 " Plugin 'L9'
 " Git plugin not hosted on GitHub
 Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-Plugin 'file:///home/gmarik/path/to/plugin'
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
@@ -27,12 +25,13 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " different version somewhere else.
 " Plugin 'ascenator/L9', {'name': 'newL9'}
 
-" All of your Plugins must be added before the following line
-" Dogrun colorscheme
-Plugin 'wadackel/vim-dogrun'
+" Atelier colorschemes
+Plugin 'atelierbram/vim-colors_atelier-schemes'
 
 " Lightline
 Plugin 'itchyny/lightline.vim'
+
+" All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
@@ -47,18 +46,19 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
+set number
+set termguicolors
+ if has('nvim')
+" https://github.com/neovim/neovim/wiki/FAQ
+set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
+endif
 
 syntax enable
-set number
-colorscheme dogrun
-
-" lightline configuration
-set laststatus=2
+set background=dark
+colorscheme Atelier_HeathDark
+set noshowmode
 let g:lightline = {
-	\ 'colorscheme': 'dogrun',
-	\ }
-" Make the background transparent when vim opens in a terminal
-hi! Normal ctermbg=NONE
+      \ 'colorscheme': 'Atelier_Heath',
+      \ }
 
-set cursorline
-let g:cssColorVimNotMessMyUpddateTime = 1
+hi Normal ctermbg=none guibg=none 

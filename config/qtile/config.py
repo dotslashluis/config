@@ -29,7 +29,6 @@ dotslashluis' Qtile configuration
 Programs used:
 dmenu
 light-locker
-ibus
 pamixer
 nm-applet
 picom
@@ -217,20 +216,46 @@ keys = [
     Key([mod], "l", lazy.spawn(lock)),
     # Note: Lock key works without mod.  This locks the screen
     # with mod + l
+
+    # Layout control
+    Key([mod, SHIFT], "b", lazy.to_layout_index(0)),
+    Key([mod, SHIFT], "f", lazy.to_layout_index(1)),
+
+    # Resize floating
+    Key([mod, CTRL], "Left", lazy.window.resize_floating(10,0)),
+
 ]
 
 layouts = [
     # BSP layout (i3 like)
     layout.Bsp(
-        border_focus  = fg,
-        border_normal = bg,
-        border_width  = 2,
-        margin        = 10
-    ),
-    layout.Floating(
         border_focus = fg,
         border_normal = bg,
-    )
+        border_width = 2,
+        margin = 5
+    ),
+    layout.Floating(
+        float_rules=[
+            {'wmclass': 'pavucontrol'},
+            {'wmclass': 'confirm'},
+            {'wmclass': 'dialog'},
+            {'wmclass': 'download'},
+            {'wmclass': 'error'},
+            {'wmclass': 'file_progress'},
+            {'wmclass': 'notification'},
+            {'wmclass': 'splash'},
+            {'wmclass': 'toolbar'},
+            {'wmclass': 'confirmreset'},  # gitk
+            {'wmclass': 'makebranch'},  # gitk
+            {'wmclass': 'maketag'},  # gitk
+            {'wname': 'branchdialog'},  # gitk
+            {'wname': 'pinentry'},  # GPG key password entry
+            {'wmclass': 'ssh-askpass'},  # ssh-askpass
+        ],
+        border_focus = fg,
+        border_normal = bg,
+
+)
 ]
 
 
@@ -299,25 +324,30 @@ main = None
 follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
-floating_layout = layout.Floating(float_rules=[
-    {'wmclass': 'pavucontrol'},
-    {'wmclass': 'confirm'},
-    {'wmclass': 'dialog'},
-    {'wmclass': 'download'},
-    {'wmclass': 'error'},
-    {'wmclass': 'file_progress'},
-    {'wmclass': 'notification'},
-    {'wmclass': 'splash'},
-    {'wmclass': 'toolbar'},
-    {'wmclass': 'confirmreset'},  # gitk
-    {'wmclass': 'makebranch'},  # gitk
-    {'wmclass': 'maketag'},  # gitk
-    {'wname': 'branchdialog'},  # gitk
-    {'wname': 'pinentry'},  # GPG key password entry
-    {'wmclass': 'ssh-askpass'},  # ssh-askpass
-])
 auto_fullscreen = True
 focus_on_window_activation = "smart"
+
+floatingLayout = layout.Floating(
+        float_rules=[
+            {'wmclass': 'pavucontrol'},
+            {'wmclass': 'confirm'},
+            {'wmclass': 'dialog'},
+            {'wmclass': 'download'},
+            {'wmclass': 'error'},
+            {'wmclass': 'file_progress'},
+            {'wmclass': 'notification'},
+            {'wmclass': 'splash'},
+            {'wmclass': 'toolbar'},
+            {'wmclass': 'confirmreset'},  # gitk
+            {'wmclass': 'makebranch'},  # gitk
+            {'wmclass': 'maketag'},  # gitk
+            {'wname': 'branchdialog'},  # gitk
+            {'wname': 'pinentry'},  # GPG key password entry
+            {'wmclass': 'ssh-askpass'},  # ssh-askpass
+        ],
+        border_focus = fg,
+        border_normal = bg,
+)
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the

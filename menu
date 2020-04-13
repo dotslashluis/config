@@ -1,7 +1,5 @@
-1 - bashrc
-2 - bash_profile
-3 - profile
-4 - qtile's config.py
-5 - vimrc
-6 - autostart
-
+1 -> bashrc
+2 -> bash_profile
+3 -> profile
+4 -> init.vim
+5 -> alacitty.yml 
