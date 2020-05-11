@@ -16,9 +16,9 @@ ln home/bash_profile $HOME/.bash_profile || "ERROR - Couldn't link bash_profile"
 ln config/init.vim $HOME/.config/nvim/init.vim || "ERROR - Couldn't link init.vim"
 
 # QTILE
-#ln config/qtile/config.py $HOME/config/qtile/config.py
-#ln config/qtile/autostart.sh $HOME/config/qtile/autostart.sh
-#ln config/qtile/brightness.sh $HOME/config/qtile/brightness.sh
+ln config/qtile/config.py $HOME/.config/qtile/config.py
+ln config/qtile/autostart.sh $HOME/.config/qtile/autostart.sh
+ln config/qtile/brightness.sh $HOME/.config/qtile/brightness.sh
 
 # ALACRITTY
 ln config/alacritty/alacritty.yml $HOME/.config/alacritty/alacritty.yml

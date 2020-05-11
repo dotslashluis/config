@@ -15,7 +15,7 @@ alias ..="cd .."
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
-export BROWSER='brave'
+export BROWSER='firefox'
 export EDITOR='nvim'
 export RCPATH="$HOME/.config/dotfiles"
 
@@ -59,6 +59,7 @@ cfg() {
 	[[ "$R" == "3" ]] && $EDITOR $RCPATH/home/profile
 	[[ "$R" == "4" ]] && $EDITOR $RCPATH/config/nvim/init.vim
 	[[ "$R" == "5" ]] && $EDITOR $RCPATH/config/alacritty/alacritty.yml
+	[[ "$R" == "6" ]] && $EDITOR $HOME/.config/i3/config
 
 }
 

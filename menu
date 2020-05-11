@@ -2,4 +2,5 @@
 2 -> bash_profile
 3 -> profile
 4 -> init.vim
-5 -> alacitty.yml 
+5 -> alacitty.yml
+6 -> i3config
