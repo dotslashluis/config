@@ -10,23 +10,14 @@ These dotfiles were made for a Lenovo Ideapad 330s-15ARR with Arch Linux as it's
 
 ## What is in this repository
 
-* Qtile configuration script and some scripts to make the experience more comfortable
+* Qtile configuration script and some scripts to make the experience more comfortable # EXTREMELY DEPRECATED.  DO NOT USE IT IF YOU EVER CLONE THIS REPO
 
 * Xorg configuration files for the touchpad and for the AMDGPU driver
 
 * Alacritty's configuration file
-
-* An installation script to automate the process of putting everything in place
-
-* .bashrc, .pam_profile, .profile and .Xresources
 
 ## What do I want to add to the repository
 
 * Fish' configuration file
 
 * A dependency list so that I can reinstall everything easily. (Kinda implemented)
-
-* .vimrc
-
-
-
